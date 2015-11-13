@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="At 5:00pm it will be:"
+        android:text="At 13:37 PM it will be:"
         android:id="@+id/timeLabel"
         android:layout_above="@+id/temperatureLabel"
         android:layout_centerHorizontal="true"
@@ -44,7 +44,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
         android:textColor="#ffffffff"
-        android:textSize="28sp" />
+        android:textSize="24sp" />
 
     <ImageView
         android:layout_width="36dp"
@@ -123,7 +123,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -45,7 +45,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener {
     public static final String TAG= MainActivity.class.getSimpleName();
     private CurrentWeather mCurrentWeather = new CurrentWeather();
-    private String currentCity;
+    private String currentCity= "Berkeley";
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private double mLatitude;
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             mGoogleApiClient.connect();
         }
 
+
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 }
             }
         });
+        Log.d(String.valueOf(mLastLocation), "location");
+
+
         if (isNetworkAvailable()){
             try {
                 getWeather();
@@ -107,8 +111,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             alertUserAboutNetwork();
         }
     }
-    
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!mResolvingError){
+            mGoogleApiClient.connect();
+        }
+    }
     @Override
     protected void onStop() {
         mGoogleApiClient.disconnect();
@@ -119,8 +129,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         String apiKey="c6f5fae6b130f0b6efd1d198d3bb3bee";
         Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
         List<Address> addresses = gcd.getFromLocation(mLatitude, mLongitude, 1);
-        currentCity= "Berkeley";
-
+        Log.d("aa", String.valueOf(""  +(mLastLocation) == null));
         if (addresses.size() > 0) {
             currentCity=addresses.get(0).getLocality();
 
@@ -219,7 +228,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         if (mLastLocation != null) {
             mLatitude = mLastLocation.getLatitude();
             mLongitude = mLastLocation.getLongitude();
+            Log.d(String.valueOf(mLatitude),"latitude");
+            Log.d(String.valueOf(mLongitude),"latitude");
         }
+        Log.d("bb", String.valueOf(""  + mLastLocation == null));
     }
 
     @Override
